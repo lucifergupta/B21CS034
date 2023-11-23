@@ -127,90 +127,91 @@ Welcome to the XV Quiz for CSL 3030 - Operating Systems!
 9. using hardware interrupts
 10. no
 11. MIT - XV6 was developed at MIT.
-12. In xv6, processes undergo different states to represent their current status during execution:
+12. In the xv6 operating system, processes experience various states to indicate their current status during execution:
 
-    UNUSED: Signifying that the process table entry is not in use, indicating that the process is not actively running.
+    UNUSED: This state signifies that the process table entry is not active, showing that the process is not actively running.
 
-    EMBRYO: Denoting a process in the initialization phase, not fully set up or ready for execution.
+    EMBRYO: This state represents a process in its initialization phase, not fully configured or ready for execution.
 
-    SLEEPING: Indicating a voluntary CPU relinquishment, with the process waiting for specific events like I/O completion or time delays.
+    SLEEPING: It indicates a voluntary release of the CPU by the process, as it waits for specific events like I/O completion or time delays.
 
-    RUNNABLE: Reflecting a process ready for execution but awaiting CPU scheduling.
+    RUNNABLE: Denotes a process prepared for execution but waiting for CPU scheduling.
 
-    RUNNING: Showing the active execution of a process on the CPU.
+    RUNNING: This state shows that a process is actively running on the CPU.
 
-    ZOMBIE: Following process completion, it enters the ZOMBIE state, waiting for the parent to acknowledge its termination and retrieve exit status.
+    ZOMBIE: After a process completes its execution, it enters the ZOMBIE state, waiting for the parent process to acknowledge its termination and retrieve exit status.
 
-These states capture the life cycle of a process in xv6, from creation to termination, with the operating system scheduler managing state transitions based on events and system calls.
+These states define the life cycle of a process in xv6, from its creation to termination. The operating system scheduler manages transitions between these states based on events and system calls.
 
-13. The XV6 file system is a simple file system with key components like inodes, directories, and blocks.
-    Inodes: Store metadata about files.
-    Directories: Organize files hierarchically.
-    Blocks: Store file data.
-14. In the context of xv6, system calls and library functions serve distinct purposes and operate at different levels of the operating system.
+13. The xv6 file system is straightforward, consisting of essential components such as inodes, directories, and blocks:
+
+    Inodes: These store metadata information about files.
+   
+    Directories: They organize files in a hierarchical structure.
+   
+    Blocks: These store the actual data of files.
+
+14. In xv6, system calls and library functions serve distinct purposes and operate at different levels within the operating system.
 
     System Calls:
-        Purpose: System calls provide a way for user-level programs to request services from the operating system kernel. They allow user programs to interact with the kernel and perform privileged operations.
+        Purpose: They enable user-level programs to request services from the operating system kernel, allowing interactions and execution of privileged operations.
         Examples in xv6:
-            fork(): Creates a new process.
-            exit(): Terminates the calling process.
-    Library Functions:
-        Purpose: Library functions are higher-level functions provided by libraries that are linked to user programs. They abstract and simplify common tasks, often by utilizing system calls under the hood.
-        Examples in xv6:
-            printf(): Outputs formatted data to the console.
-            malloc(), free(): Manages dynamic memory allocation.
+            - fork(): Creates a new process.
+            - exit(): Terminates the calling process.
 
-15. Memory paging in XV6 involves dividing physical memory into fixed-size pages. It provides benefits such as efficient use of memory and isolation of processes.
-16.Ans. In xv6, the shell commands are basic but serve fundamental functions. Here are three essential shell commands:
+    Library Functions:
+        Purpose: These higher-level functions, provided by libraries linked to user programs, abstract and simplify common tasks, often utilizing system calls underneath.
+        Examples in xv6:
+            - printf(): Outputs formatted data to the console.
+            - malloc(), free(): Manage dynamic memory allocation.
+
+15. Memory paging in xv6 involves dividing physical memory into fixed-size pages, offering advantages such as efficient memory utilization and process isolation.
+
+16. In xv6, the shell commands are fundamental but serve essential purposes. Here are three crucial shell commands:
 
     ls (List):
-        Purpose: Lists the files and directories in the current working directory.
+        Purpose: Lists files and directories in the current working directory.
         Usage: ls [options] [file(s)]
-        Example: ls -l displays a detailed list of files with additional information like permissions, owner, size, and modification time.
+        Example: ls -l displays detailed file information like permissions, owner, size, and modification time.
 
     cd (Change Directory):
         Purpose: Changes the current working directory.
         Usage: cd [directory]
-        Example: cd /home/user changes the current directory to "/home/user."
+        Example: cd /home/user changes the directory to "/home/user."
 
     cp (Copy):
         Purpose: Copies files or directories from one location to another.
         Usage: cp [options] source destination
         Example: cp file1.txt /backup copies "file1.txt" to the "/backup" directory.
-17. Process synchronization is crucial to coordinate the activities of multiple processes. Mechanisms like locks, semaphores, and conditional variables are used to achieve synchronization in XV6.
-18. In xv6, interrupts play a vital role in handling asynchronous events, improving system responsiveness, and facilitating efficient multitasking. Key points include:
 
-    Role of Interrupts:
-        Handle asynchronous events independently of CPU execution, enhancing concurrency.
+17. Process synchronization is vital in xv6 to coordinate the activities of multiple processes. Mechanisms like locks, semaphores, and conditional variables are used to achieve synchronization.
 
-    Handling Interrupts in XV6:
+18. Interrupts play a critical role in xv6, handling asynchronous events, enhancing system responsiveness, and enabling efficient multitasking:
+
+    - Role of Interrupts:
+        They handle asynchronous events independently of CPU execution, boosting concurrency.
+    - Handling Interrupts in xv6:
         Utilizes an Interrupt Vector Table (IVT) and Interrupt Descriptor Table (IDT).
         Interrupt Service Routines (ISRs) written in assembly handle specific interrupt types.
+    - Significance in System Operation:
+        Enable efficient I/O operations, timer-based task switching, and device communication.
+        Improve system responsiveness by promptly addressing external events.
 
-    Significance in System Operation:
-        Enables efficient I/O operations, timer-based task switching, and device communication.
-        Improves system responsiveness by promptly handling external events.
+19. xv6 implements virtual memory through paging and a two-level page table system, creating an illusion of a larger address space than physical memory for processes.
 
-In essence, interrupts contribute to the overall efficiency and responsiveness of the xv6 operating system by allowing it to handle external events without waiting and enabling concurrent execution.
-19. In xv6, virtual memory is implemented using paging and a two-level page table system. Processes have an illusion of a larger address space than physical memory through dynamic mapping.
+    Advantages include:
+    - Increased Address Space for executing larger programs.
+    - Isolation ensuring private virtual address space for each process.
+    - Simplified Memory Management abstracting physical memory details.
+    - Flexible Memory Allocation allowing dynamic loading of program portions.
+    - Improved Utilization enhancing overall system performance.
+    - Memory Protection assigning different permissions to prevent unauthorized access.
 
-Advantages:
-    Increased Address Space:
-        Allows execution of larger programs.
-    Isolation:
-        Ensures each process has a private virtual address space.
-    Simplified Memory Management:
-        Abstracts physical memory details for applications.
-    Flexible Memory Allocation:
-        Enables dynamic loading of program portions.
-    Improved Utilization:
-        Enhances overall system performance.
-    Memory Protection:
-        Assigns different permissions to prevent unauthorized access.
-Virtual memory in xv6 provides efficiency, isolation, and flexibility in managing memory resources.
-20. The boot process involves:
-    Power-on: The computer is powered on.
-    BIOS/UEFI: Basic system initialization.
-    Bootloader: Loads the XV6 kernel into memory.
-    Kernel Initialization: Sets up essential data structures.
-    Executing Init Process: Initiates user space processes.
+    Virtual memory in xv6 offers efficiency, isolation, and flexibility in managing memory resources.
+
+20. The boot process in xv6 follows several stages:
+    - Power-on: The computer is powered on.
+    - BIOS/UEFI: Basic system initialization.
+    - Bootloader: Loads the xv6 kernel into memory.
+    - Kernel Initialization: Sets up essential data structures.
+    - Executing Init Process: Initiates user space processes.
